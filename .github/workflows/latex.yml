@@ -1,0 +1,66 @@
+name: Build LaTeX document
+
+on:
+  push:
+    branches: ["**"]
+  workflow_dispatch:
+
+permissions:
+  contents: write # nötig, um Releases anzulegen
+
+# Läufe nacheinander, damit zwei schnelle Pushes nicht dieselbe Version vergeben
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0 # nötig, um vorhandene Tags zu sehen
+
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v4
+        with:
+          root_file: main.tex
+
+      - name: Upload PDF as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PDF
+          path: main.pdf
+
+      - name: Determine next version
+        if: github.ref == 'refs/heads/main'
+        run: |
+          LAST="$(git tag --list 'v*' --sort=-v:refname | head -n1)"
+          if [ -z "$LAST" ]; then
+            NEXT="v1.0"
+          else
+            NEXT="${LAST%%.*}.$(( ${LAST##*.} + 1 ))"
+          fi
+          echo "VERSION=$NEXT" >> "$GITHUB_ENV"
+
+      - name: Rename PDF
+        run: |
+          REF="${VERSION:-${GITHUB_REF_NAME//\//-}}"
+          PDF_NAME="$(TZ=Europe/Berlin date +%F)-es-tg-glossar-${REF}.pdf"
+          mv main.pdf "$PDF_NAME"
+          echo "PDF_NAME=$PDF_NAME" >> "$GITHUB_ENV"
+
+      - name: Upload PDF as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.PDF_NAME }}
+          path: ${{ env.PDF_NAME }}
+
+      - name: Create release with PDF
+        if: github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.VERSION }}
+          target_commitish: ${{ github.sha }}
+          files: ${{ env.PDF_NAME }}
+          generate_release_notes: true

@@ -1,0 +1,72 @@
+% !TEX program = lualatex
+% Glossar – Hauptdatei. Die Einträge stehen in content.tex.
+% Zweimal mit LuaLaTeX kompilieren, damit "Seite x von y" stimmt.
+
+\documentclass[paper=a4, fontsize=11pt, parskip=full-]{scrartcl}
+
+% --- Seitenränder nach DIN 5008 ----------------------------------------------
+\usepackage[
+  left      = 25mm,
+  right     = 20mm,
+  top       = 20mm,
+  bottom    = 20mm,
+  includefoot,
+  footskip  = 10mm,
+]{geometry}
+
+% --- Sprache und Schrift -----------------------------------------------------
+\usepackage[ngerman]{babel}
+\usepackage{fontspec}           % Latin Modern (OpenType) als Standard
+\usepackage{microtype}
+\usepackage[autostyle]{csquotes}
+
+% KOMA setzt Titel und Überschriften standardmäßig serifenlos.
+\setkomafont{disposition}{\normalfont\bfseries}
+
+% --- Einheiten ---------------------------------------------------------------
+\usepackage{siunitx}
+\sisetup{locale = DE, per-mode = symbol}
+\DeclareSIUnit\euro{€}
+
+% --- Fußzeile: Datum links, "Seite x von y" rechts ---------------------------
+\usepackage{scrlayer-scrpage}
+\usepackage{lastpage}
+\newcommand*\stand{\today}      % bei Bedarf festes Datum eintragen
+\clearpairofpagestyles
+\ifoot*{\footnotesize Stand: \stand}
+\ofoot*{\footnotesize Seite~\thepage\ von~\pageref{LastPage}}
+\setkomafont{pagefoot}{\normalfont}
+\pagestyle{scrheadings}
+
+% --- Abkürzungsliste ---------------------------------------------------------
+\usepackage{enumitem}
+\newlist{abkuerzungen}{description}{1}
+\setlist[abkuerzungen]{
+  style      = nextline,
+  labelwidth = 5em,
+  leftmargin = 6em,
+  font       = \normalfont\bfseries,
+  itemsep    = \baselineskip,   % Leerzeile zwischen Einträgen (DIN 5008)
+  parsep     = 0pt,
+}
+
+% \abk{Kürzel}{Langform}{Erklärung} – Erklärung darf leer sein: {}
+\NewDocumentCommand\abk{m m m}{%
+  \item[#1] \textit{#2}%
+  \IfBlankF{#3}{\par #3}%
+}
+
+% --- Strafen -----------------------------------------------------------------
+\clubpenalty  = 10000
+\widowpenalty = 10000
+
+% =============================================================================
+\begin{document}
+
+{\usekomafont{title}\LARGE Glossar --- TG und ES\par}
+
+\begin{abkuerzungen}
+  \input{content}
+\end{abkuerzungen}
+
+\end{document}
