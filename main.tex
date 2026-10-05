@@ -28,12 +28,13 @@
 \sisetup{locale = DE, per-mode = symbol}
 \DeclareSIUnit\euro{€}
 
-% --- Fußzeile: Datum links, "Seite x von y" rechts ---------------------------
+% --- Fußzeile: Datum und Version links, "Seite x von y" rechts --------------
 \usepackage{scrlayer-scrpage}
 \usepackage{lastpage}
 \newcommand*\stand{\today}      % bei Bedarf festes Datum eintragen
+\InputIfFileExists{version.tex}{}{\newcommand*\version{lokal}} % von CI erzeugt
 \clearpairofpagestyles
-\ifoot*{\footnotesize Stand: \stand}
+\ifoot*{\footnotesize Stand: \stand\ -- Version~\version}
 \ofoot*{\footnotesize Seite~\thepage\ von~\pageref{LastPage}}
 \setkomafont{pagefoot}{\normalfont}
 \pagestyle{scrheadings}

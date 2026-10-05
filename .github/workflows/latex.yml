@@ -21,6 +21,24 @@ jobs:
         with:
           fetch-depth: 0 # nötig, um vorhandene Tags zu sehen
 
+      - name: Determine next version
+        if: github.ref == 'refs/heads/main'
+        env:
+          MAJOR: 2 # erhöhen, um eine neue Hauptversion (vN.0) zu beginnen
+        run: |
+          LAST="$(git tag --list "v${MAJOR}.*" --sort=-v:refname | head -n1)"
+          if [ -z "$LAST" ]; then
+            NEXT="v${MAJOR}.0"
+          else
+            NEXT="v${MAJOR}.$(( ${LAST##*.} + 1 ))"
+          fi
+          echo "VERSION=$NEXT" >> "$GITHUB_ENV"
+
+      - name: Write version file
+        run: |
+          REF="${VERSION:-${GITHUB_REF_NAME//\//-}}"
+          echo "\\newcommand*\\version{${REF#v}}" > version.tex
+
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v4
         with:
@@ -32,17 +50,6 @@ jobs:
         with:
           name: PDF
           path: main.pdf
-
-      - name: Determine next version
-        if: github.ref == 'refs/heads/main'
-        run: |
-          LAST="$(git tag --list 'v*' --sort=-v:refname | head -n1)"
-          if [ -z "$LAST" ]; then
-            NEXT="v1.0"
-          else
-            NEXT="${LAST%%.*}.$(( ${LAST##*.} + 1 ))"
-          fi
-          echo "VERSION=$NEXT" >> "$GITHUB_ENV"
 
       - name: Rename PDF
         run: |
