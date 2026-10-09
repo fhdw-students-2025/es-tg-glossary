@@ -35,14 +35,14 @@
 \InputIfFileExists{version.tex}{}{\newcommand*\version{lokal}} % von CI erzeugt
 \clearpairofpagestyles
 \ifoot*{\footnotesize Stand: \stand\ -- Version~\version}
-\ofoot*{\footnotesize Seite~\thepage\ von~\pageref{LastPage}}
+\ofoot*{\footnotesize Seite~\thepage\ von~\pageref*{LastPage}}% * = ohne Link
 \setkomafont{pagefoot}{\normalfont}
 \pagestyle{scrheadings}
 
-% --- Abkürzungsliste ---------------------------------------------------------
+% --- Glossar -----------------------------------------------------------------
 \usepackage{enumitem}
-\newlist{abkuerzungen}{description}{1}
-\setlist[abkuerzungen]{
+\newlist{glossar}{description}{1}
+\setlist[glossar]{
   style      = nextline,
   labelwidth = 5em,
   leftmargin = 6em,
@@ -51,23 +51,79 @@
   parsep     = 0pt,
 }
 
-% \abk{Kürzel}{Langform}{Erklärung} – Erklärung darf leer sein: {}
-\NewDocumentCommand\abk{m m m}{%
-  \item[#1] \textit{#2}%
-  \IfBlankF{#3}{\par #3}%
-}
+% \eintrag{Begriff}[Felder]{Erklärung} – Felder siehe content.tex.
+% Nicht gesetzte Felder erscheinen nicht im PDF.
+\ExplSyntaxOn
+\keys_define:nn { eintrag }
+  {
+    lang  .tl_set:N    = \l__eintrag_lang_tl ,
+    dt    .tl_set:N    = \l__eintrag_dt_tl ,
+    auch  .tl_set:N    = \l__eintrag_auch_tl ,
+    siehe .clist_set:N = \l__eintrag_siehe_clist ,
+    id    .tl_set:N    = \l__eintrag_id_tl ,
+  }
+\seq_new:N \l__eintrag_siehe_seq
+
+% Sprungmarke mit dem Begriff als Verweistext, damit \ref den Begriff druckt.
+\cs_new_protected:Npn \__eintrag_label:nn #1#2
+  {
+    \phantomsection
+    \cs_set:cpn { @currentlabel } {#2}
+    \label { gl:#1 }
+  }
+\cs_generate_variant:Nn \__eintrag_label:nn { V }
+
+\NewDocumentCommand \eintrag { m O{} m }
+  {
+    \tl_clear:N \l__eintrag_lang_tl
+    \tl_clear:N \l__eintrag_dt_tl
+    \tl_clear:N \l__eintrag_auch_tl
+    \clist_clear:N \l__eintrag_siehe_clist
+    \tl_set:Nn \l__eintrag_id_tl {#1}
+    \keys_set:nn { eintrag } {#2}
+    \item [#1]
+    \__eintrag_label:Vn \l__eintrag_id_tl {#1}
+    \tl_if_empty:NF \l__eintrag_lang_tl
+      { \textit { \l__eintrag_lang_tl } \par }
+    \tl_if_empty:NF \l__eintrag_dt_tl
+      { dt.~\l__eintrag_dt_tl .~ }
+    #3
+    \tl_if_empty:NF \l__eintrag_auch_tl
+      { \par Auch:~\l__eintrag_auch_tl }
+    \clist_if_empty:NF \l__eintrag_siehe_clist
+      {
+        \seq_set_from_clist:NN \l__eintrag_siehe_seq \l__eintrag_siehe_clist
+        \par Siehe~auch:~
+        \seq_map_indexed_inline:Nn \l__eintrag_siehe_seq
+          { \int_compare:nNnT {##1} > { 1 } { ,~ } \siehe {##2} }
+      }
+  }
+
+% \siehe{Begriff} – Verweis auf einen anderen Eintrag (bzw. dessen id).
+\NewDocumentCommand \siehe { m } { \ref { gl:#1 } }
+\ExplSyntaxOff
 
 % --- Strafen -----------------------------------------------------------------
 \clubpenalty  = 10000
 \widowpenalty = 10000
+
+% --- Verweise (als letztes Paket laden) --------------------------------------
+\usepackage{xcolor}
+\definecolor{linkblau}{RGB}{0, 51, 153}
+\usepackage{hyperref}
+\hypersetup{
+  pdftitle   = {Glossar -- TG und ES},
+  colorlinks = true,
+  allcolors  = linkblau,       % Verweise dunkelblau, damit sie als Link erkennbar sind
+}
 
 % =============================================================================
 \begin{document}
 
 {\usekomafont{title}\LARGE Glossar --- TG und ES\par}
 
-\begin{abkuerzungen}
+\begin{glossar}
   \input{content}
-\end{abkuerzungen}
+\end{glossar}
 
 \end{document}
