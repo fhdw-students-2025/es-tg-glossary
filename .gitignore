@@ -313,3 +313,6 @@ TSWLatexianTemp*
 
 # End of https://www.toptal.com/developers/gitignore/api/latex
 version.tex
+
+# Built PDFs live in releases tab:
+*.pdf
