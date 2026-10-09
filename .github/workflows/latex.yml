@@ -24,7 +24,7 @@ jobs:
       - name: Determine next version
         if: github.ref == 'refs/heads/main'
         env:
-          MAJOR: 2 # erhöhen, um eine neue Hauptversion (vN.0) zu beginnen
+          MAJOR: 3 # erhöhen, um eine neue Hauptversion (vN.0) zu beginnen
         run: |
           LAST="$(git tag --list "v${MAJOR}.*" --sort=-v:refname | head -n1)"
           if [ -z "$LAST" ]; then
