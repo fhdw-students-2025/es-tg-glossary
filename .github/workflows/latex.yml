@@ -73,6 +73,6 @@ jobs:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: |
           curl -fsS \
-            -F "payload_json={\"content\":\"Neue Version **${VERSION}** des Glossars: ${{ github.server_url }}/${{ github.repository }}/releases/tag/${VERSION}\"}" \
+            -F "payload_json={\"content\":\"Neue Version **${VERSION}** des Glossars: <${{ github.server_url }}/${{ github.repository }}/releases/tag/${VERSION}\"}>" \
             -F "files[0]=@${PDF_NAME}" \
             "$DISCORD_WEBHOOK_URL"
