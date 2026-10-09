@@ -16,10 +16,12 @@
   lang  = Analog-to-Digital Converter,
   dt    = Analog-Digital-Umsetzer (ADU),
   auch  = A2D,
+  siehe = DAC,
 ]{Wandelt ein analoges Messsignal in ein digitales Signal um. Dazu wird das Signal abgetastet (zeitliche Diskretisierung) und quantisiert (Diskretisierung der Amplitude).}
 
 \eintrag{ARM}[
   lang  = Advanced RISC Machine,
+  siehe = ISA,
 ]{Prozessorarchitektur nach dem RISC-Prinzip (Reduced Instruction Set Computer): wenige, einfache Befehle. Weit verbreitet in Mobilgeräten und eingebetteten Systemen.}
 
 \eintrag{ASCII}[
@@ -28,39 +30,45 @@
 
 \eintrag{ASIC}[
   lang  = Application-Specific Integrated Circuit,
+  siehe = FPGA,
 ]{Ist ein IC, der speziell für eine klar definierte Aufgabe entwickelt wurde. Er ist nicht frei programmierbar.}
 
 \eintrag{ASP}[
   lang  = Average Selling Price,
   dt    = durchschnittlicher Verkaufspreis,
+  siehe = {NRE, TTM},
 ]{Mittlerer Preis, zu dem ein Produkt über alle Kunden und Stückzahlen hinweg verkauft wird. Bestimmt zusammen mit Stückzahl und NRE-Kosten die Wirtschaftlichkeit eines Produkts.}
 
 \eintrag{ASSP}[
   lang  = Application-Specific Standard Product,
-]{Ist ein IC, der für einen bestimmten Anwendungsbereich entwickelt wurde, im Gegensatz zu einem ASIC aber frei verkäuflich ist.}
+]{Ist ein IC, der für einen bestimmten Anwendungsbereich entwickelt wurde, im Gegensatz zu einem \siehe{ASIC} aber frei verkäuflich ist.}
 
 \eintrag{BCD}[
   lang  = Binary Coded Decimal,
   dt    = binär codierte Dezimalzahl,
 ]{Jede Dezimalziffer wird einzeln als 4-Bit-Binärzahl (Tetrade) dargestellt.}
 
-\eintrag{Bus}
-    {Gemeinsamer Übertragungsweg, über den mehrere Komponenten Daten austauschen.}
+\eintrag{Bus}[
+  siehe = {Feldbus, ISA-Bus, PCI},
+]{Gemeinsamer Übertragungsweg, über den mehrere Komponenten Daten austauschen.}
 
 \eintrag{C2C}[
   lang  = Car-to-Car,
   dt    = Fahrzeug-zu-Fahrzeug-Kommunikation,
   auch  = V2V (Vehicle-to-Vehicle),
+  siehe = C2I,
 ]{Fahrzeuge tauschen direkt Daten aus, etwa Warnungen vor Gefahrenstellen.}
 
 \eintrag{C2I}[
   lang  = Car-to-Infrastructure,
   dt    = Fahrzeug-zu-Infrastruktur-Kommunikation,
   auch  = V2I (Vehicle-to-Infrastructure),
+  siehe = C2C,
 ]{Fahrzeuge tauschen Daten mit der Verkehrsinfrastruktur aus, etwa mit Ampeln oder Verkehrsleitsystemen.}
 
-\eintrag{Cache}
-    {Schneller Zwischenspeicher für konfliktfreien Zugriff auf häufig benötigte Daten. Funktion: Entlastung des langsameren Hauptspeichers, somit Reduzierung von Ladezeiten und Verbesserung der Systemperformanz.}
+\eintrag{Cache}[
+  siehe = SRAM,
+]{Schneller Zwischenspeicher für konfliktfreien Zugriff auf häufig benötigte Daten. Funktion: Entlastung des langsameren Hauptspeichers, somit Reduzierung von Ladezeiten und Verbesserung der Systemperformanz.}
 
 \eintrag{CCD}[
   lang  = Charge-Coupled Device,
@@ -70,18 +78,20 @@
 \eintrag{CMOS}[
   lang  = Complementary Metal-Oxide-Semiconductor,
   dt    = komplementärer Metall-Oxid-Halbleiter,
+  siehe = {MOSFET, TTL},
 ]{Bauweise für Logikschaltungen, bei der immer zwei gegensätzlich schaltende Transistoren ein Paar bilden: Ist der eine an, ist der andere aus. Dadurch fließt fast nur im Moment des Umschaltens Strom. Standardtechnik heutiger ICs.}
 
 \eintrag{CPU}[
   lang  = Central Processing Unit,
   auch  = Prozessor,
+  siehe = {ISA, MCU},
 ]{Hardwarekomponente, führt mathematische und logische Operationen durch. Besteht aus ALU, Steuerwerk und Registern.}
 
 \eintrag{DAC}[
   lang  = Digital-to-Analog Converter,
   dt    = Digital-Analog-Umsetzer (DAU),
   auch  = D2A,
-]{Wandelt ein digitales Signal in ein analoges Signal (Spannung oder Strom) um. Gegenstück zum ADC.}
+]{Wandelt ein digitales Signal in ein analoges Signal (Spannung oder Strom) um. Gegenstück zum \siehe{ADC}.}
 
 \eintrag{DB}[
   lang  = Datenbank,
@@ -90,11 +100,13 @@
 \eintrag{DMA}[
   lang  = Direct Memory Access,
   dt    = Speicherdirektzugriff,
+  siehe = Polling,
 ]{Peripheriegeräte tauschen Daten direkt mit dem Hauptspeicher aus, ohne dass die CPU jedes Datenwort selbst übertragen muss. Entlastet so die CPU.}
 
 \eintrag{DRAM}[
   lang  = Dynamic Random Access Memory,
   dt    = dynamischer RAM,
+  siehe = {RAM, SRAM},
 ]{Speichert jedes Bit als Ladung in einem winzigen Kondensator. Die Ladung entweicht langsam, deshalb muss der Inhalt ständig aufgefrischt werden. Günstig und platzsparend, daher als Arbeitsspeicher im PC genutzt.}
 
 \eintrag{EAC}[
@@ -105,7 +117,7 @@
 \eintrag{EEPROM}[
   lang  = Electrically Erasable Programmable Read-Only Memory,
   dt    = elektrisch löschbarer programmierbarer Nur-Lese-Speicher,
-]{Nichtflüchtiger Speicher, der im Gegensatz zum EPROM elektrisch gelöscht wird, byteweise und ohne Ausbau aus der Schaltung.}
+]{Nichtflüchtiger Speicher, der im Gegensatz zum \siehe{EPROM} elektrisch gelöscht wird, byteweise und ohne Ausbau aus der Schaltung.}
 
 \eintrag{ENIAC}[
   lang  = Electronic Numerical Integrator and Computer,
@@ -114,13 +126,16 @@
 \eintrag{EPROM}[
   lang  = Erasable Programmable Read-Only Memory,
   dt    = löschbarer programmierbarer Nur-Lese-Speicher,
+  siehe = {PROM, EEPROM},
 ]{Nichtflüchtiger Speicher, der elektrisch beschrieben und mit UV-Licht durch ein Quarzfenster im Gehäuse gelöscht wird.}
 
-\eintrag{Feldbus}
-    {Bus in der Automatisierungstechnik, der Feldgeräte (Sensoren, Aktoren) mit einer Steuerung verbindet. Ersetzt die Einzelverdrahtung jedes Geräts.}
+\eintrag{Feldbus}[
+  siehe = Bus,
+]{Bus in der Automatisierungstechnik, der Feldgeräte (Sensoren, Aktoren) mit einer Steuerung verbindet. Ersetzt die Einzelverdrahtung jedes Geräts.}
 
 \eintrag{FPGA}[
   lang  = Field-Programmable Gate Array,
+  siehe = PLD,
 ]{Integrierter Schaltkreis, dessen Logikfunktion erst nach der Fertigung durch eine Konfigurationsdatei festgelegt wird.}
 
 \eintrag{FSM}[
@@ -131,11 +146,13 @@
 \eintrag{H2H}[
   lang  = Human-to-Human,
   dt    = Mensch-zu-Mensch-Kommunikation,
+  siehe = {H2T, T2T},
 ]{Menschen kommunizieren über ein Netzwerk miteinander.}
 
 \eintrag{H2T}[
   lang  = Human-to-Thing,
   dt    = Mensch-zu-Ding-Kommunikation,
+  siehe = {H2H, T2T, IoT},
 ]{Ein Mensch steuert ein vernetztes Gerät oder ruft dessen Daten ab.}
 
 \eintrag{HW/SW-Cosimulation}[
@@ -148,7 +165,7 @@
 
 \eintrag{IEEE}[
   lang  = Institute of Electrical and Electronics Engineers,
-]{Weltweiter Berufsverband für Elektrotechnik und Informatik, der u.\,a. technische Standards herausgibt, etwa IEEE 754 für Gleitkommazahlen.}
+]{Weltweiter Berufsverband für Elektrotechnik und Informatik, der u.\,a. technische Standards herausgibt, etwa \siehe{IEEE 754} für Gleitkommazahlen.}
 
 \eintrag{IEEE 754}[
   lang  = IEEE Standard for Floating-Point Arithmetic,
@@ -162,17 +179,18 @@
 \eintrag{IoT}[
   lang  = Internet of Things,
   dt    = Internet der Dinge,
+  siehe = {T2T, H2T},
 ]{Vernetzung physischer Geräte mit Sensoren und Aktoren, sodass sie über das Internet Daten austauschen und selbstständig zusammenarbeiten. Beispiel: Smart Home, etwa ein Heizungsthermostat, das sich per App steuern lässt und automatisch herunterregelt, wenn ein Fensterkontakt ein offenes Fenster meldet.}
 
 \eintrag{ISA}[
   lang  = Industry Standard Architecture,
   id    = ISA-Bus,
-]{Bus-Standard für Erweiterungskarten im IBM-PC (ab 1981). Später durch PCI abgelöst.}
+]{Bus-Standard für Erweiterungskarten im IBM-PC (ab 1981). Später durch \siehe{PCI} abgelöst.}
 
 \eintrag{ISA}[
   lang  = Instruction Set Architecture,
   dt    = Befehlssatzarchitektur,
-]{Legt fest, welche Befehle, Datentypen und Adressierungsarten ein Prozessor versteht. Beispiele: x86, x86-64, ARM.}
+]{Legt fest, welche Befehle, Datentypen und Adressierungsarten ein Prozessor versteht. Beispiele: x86, x86-64, \siehe{ARM}.}
 
 \eintrag{JPEG}[
   lang  = Joint Photographic Experts Group,
@@ -195,11 +213,13 @@
 \eintrag{LSB}[
   lang  = Least Significant Bit,
   dt    = niederwertigstes Bit,
+  siehe = MSB,
 ]{Bit mit der kleinsten Stellenwertigkeit ($2^0$), in der üblichen Schreibweise ganz rechts.}
 
 \eintrag{MCU}[
   lang  = Microcontroller Unit,
   dt    = Mikrocontroller,
+  siehe = CPU,
 ]{Vereint CPU, Speicher und Peripherie auf einem einzigen IC. Typischer Rechenkern eingebetteter Systeme.}
 
 \eintrag{MIPS}[
@@ -209,15 +229,18 @@
 \eintrag{MOSFET}[
   lang  = Metal-Oxide-Semiconductor Field-Effect Transistor,
   dt    = Metall-Oxid-Halbleiter-Feldeffekttransistor,
-]{Häufigste Transistorart. Eine Spannung am Steueranschluss (Gate) schaltet den Strom zwischen den beiden anderen Anschlüssen ein oder aus. Da das Gate durch eine dünne Isolierschicht abgetrennt ist, braucht das Schalten selbst fast keinen Strom. Grundbaustein von CMOS.}
+  siehe = Transistor,
+]{Häufigste Transistorart. Eine Spannung am Steueranschluss (Gate) schaltet den Strom zwischen den beiden anderen Anschlüssen ein oder aus. Da das Gate durch eine dünne Isolierschicht abgetrennt ist, braucht das Schalten selbst fast keinen Strom. Grundbaustein von \siehe{CMOS}.}
 
 \eintrag{MSB}[
   lang  = Most Significant Bit,
   dt    = höchstwertiges Bit,
+  siehe = LSB,
 ]{Bit mit der größten Stellenwertigkeit, in der üblichen Schreibweise ganz links. Zeigt bei vorzeichenbehafteten Zahlen das Vorzeichen an.}
 
 \eintrag{NRE}[
   lang  = Non-Recurring Engineering Costs,
+  siehe = {ASP, TTM},
 ]{Einmalige Kosten für Entwicklung, Verifikation und Fertigungsvorbereitung, die unabhängig von der Stückzahl anfallen.}
 
 \eintrag{Osc}[
@@ -232,25 +255,27 @@
 
 \eintrag{PCI}[
   lang  = Peripheral Component Interconnect,
-]{Paralleler Bus-Standard für Erweiterungskarten im PC (ab 1992). Nachfolger von ISA, später durch das serielle PCI Express (PCIe) abgelöst.}
+]{Paralleler Bus-Standard für Erweiterungskarten im PC (ab 1992). Nachfolger von \siehe{ISA-Bus}, später durch das serielle PCI Express (PCIe) abgelöst.}
 
 \eintrag{PLD}[
   lang  = Programmable Logic Device,
   dt    = programmierbarer Logikbaustein,
-]{IC, dessen Logikfunktion nicht schon bei der Fertigung feststeht, sondern vom Anwender festgelegt wird. Oberbegriff, zu dem auch das FPGA gehört.}
+]{IC, dessen Logikfunktion nicht schon bei der Fertigung feststeht, sondern vom Anwender festgelegt wird. Oberbegriff, zu dem auch das \siehe{FPGA} gehört.}
 
 \eintrag{Polling}[
   dt    = zyklische Abfrage,
+  siehe = DMA,
 ]{Die CPU fragt ein Gerät in festen Abständen immer wieder, ob neue Daten vorliegen. Einfach umzusetzen, kostet aber Rechenzeit, auch wenn nichts anliegt. Gegenstück: Interrupt, bei dem sich das Gerät von selbst meldet.}
 
 \eintrag{PROM}[
   lang  = Programmable Read-Only Memory,
   dt    = programmierbarer Nur-Lese-Speicher,
-]{Kann nach der Fertigung genau einmal beschrieben werden und ist danach unveränderlich. Vorstufe von EPROM und EEPROM, die sich wieder löschen lassen.}
+]{Kann nach der Fertigung genau einmal beschrieben werden und ist danach unveränderlich. Vorstufe von \siehe{EPROM} und \siehe{EEPROM}, die sich wieder löschen lassen.}
 
 \eintrag{RAM}[
   lang  = Random Access Memory,
   dt    = Speicher mit wahlfreiem Zugriff,
+  siehe = {DRAM, SRAM},
 ]{Jede Speicherzelle ist direkt über ihre Adresse lesbar und beschreibbar. Flüchtig, d.\,h. der Inhalt geht ohne Stromversorgung verloren. Dient als Arbeitsspeicher.}
 
 \eintrag{Rapid Prototyping}[
@@ -270,27 +295,30 @@
 \eintrag{SRAM}[
   lang  = Static Random Access Memory,
   dt    = statischer RAM,
-]{Speichert jedes Bit in einer kleinen Schaltung aus mehreren Transistoren. Behält die Daten, solange Strom anliegt, ohne aufgefrischt zu werden. Schnell, aber teuer und platzintensiv, daher vor allem als Cache genutzt.}
+  siehe = {RAM, DRAM},
+]{Speichert jedes Bit in einer kleinen Schaltung aus mehreren Transistoren. Behält die Daten, solange Strom anliegt, ohne aufgefrischt zu werden. Schnell, aber teuer und platzintensiv, daher vor allem als \siehe{Cache} genutzt.}
 
 \eintrag{T2T}[
   lang  = Thing-to-Thing,
   dt    = Ding-zu-Ding-Kommunikation,
   auch  = M2M (Machine-to-Machine),
-]{Vernetzte Geräte tauschen Daten ohne menschliches Zutun aus. Grundlage des IoT.}
+]{Vernetzte Geräte tauschen Daten ohne menschliches Zutun aus. Grundlage des \siehe{IoT}.}
 
 \eintrag{Tiefpass}[
   auch  = Tiefpassfilter,
 ]{Ein elektronischer Filter, der Signalanteile unterhalb seiner Grenzfrequenz passieren lässt und solche oberhalb dieser blockiert.}
 
-\eintrag{Transistor}
-    {Halbleiterbauelement, das als elektronischer Schalter oder Verstärker arbeitet: Ein kleines Steuersignal regelt einen größeren Strom. Grundbaustein aller digitalen Schaltungen.}
+\eintrag{Transistor}[
+  siehe = {MOSFET, TTL},
+]{Halbleiterbauelement, das als elektronischer Schalter oder Verstärker arbeitet: Ein kleines Steuersignal regelt einen größeren Strom. Grundbaustein aller digitalen Schaltungen.}
 
 \eintrag{TTL}[
   lang  = Transistor-Transistor-Logik,
-]{Bauweise für Logikschaltungen aus Bipolartransistoren, die anders als der MOSFET über einen Steuerstrom geschaltet werden. Arbeitet mit 5\,V. Verbraucht auch im Ruhezustand Strom und wurde daher weitgehend durch CMOS verdrängt.}
+]{Bauweise für Logikschaltungen aus Bipolartransistoren, die anders als der \siehe{MOSFET} über einen Steuerstrom geschaltet werden. Arbeitet mit 5\,V. Verbraucht auch im Ruhezustand Strom und wurde daher weitgehend durch \siehe{CMOS} verdrängt.}
 
 \eintrag{TTM}[
   lang  = Time-to-Market,
+  siehe = NRE,
 ]{Zeitspanne von der Produktidee bis zur Markteinführung.}
 
 \eintrag{UART}[
