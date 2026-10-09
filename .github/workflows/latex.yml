@@ -45,12 +45,6 @@ jobs:
           root_file: main.tex
           latexmk_use_lualatex: true
 
-      - name: Upload PDF as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: PDF
-          path: main.pdf
-
       - name: Rename PDF
         run: |
           REF="${VERSION:-${GITHUB_REF_NAME//\//-}}"
@@ -72,3 +66,13 @@ jobs:
           target_commitish: ${{ github.sha }}
           files: ${{ env.PDF_NAME }}
           generate_release_notes: true
+
+      - name: Send PDF to Discord
+        if: github.ref == 'refs/heads/main'
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          curl -fsS \
+            -F "payload_json={\"content\":\"Neue Version **${VERSION}** des Glossars: ${{ github.server_url }}/${{ github.repository }}/releases/tag/${VERSION}\"}" \
+            -F "files[0]=@${PDF_NAME}" \
+            "$DISCORD_WEBHOOK_URL"
